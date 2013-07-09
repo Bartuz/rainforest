@@ -26,6 +26,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html #new.html.erb
       format.json { render json: @product}
+    end
   end
 
   def create
@@ -58,7 +59,7 @@ class ProductsController < ApplicationController
         format.json {  head :no_content }
       else 
         format.html {
-          flash.now[:notice]= notice: "Update proccess coudn't be completed!"
+          flash.now[:notice]= "Update proccess coudn't be completed!"
           render :edit
         }
         format.json { render json: @product.errors, status: :unprocessable_entity }
