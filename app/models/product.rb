@@ -5,6 +5,9 @@ class Product < ActiveRecord::Base
 
   validates :picture, format: {with: %r{\.(png|jpg|gif)$}i, messsage: "Pic format must be png/jpg/gif!"}
 
+  def formated_price
+  	sprintf("%.2f",price)
+  end
 
   private
 
