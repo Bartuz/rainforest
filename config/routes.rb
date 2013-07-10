@@ -1,7 +1,14 @@
 Rainforest::Application.routes.draw do
+  get "user/new"
+
+  get "user/create"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
+  
   resources :products
+  resources :users, only: [:new,:create]
+
   root :to => "products#index"
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
