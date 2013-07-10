@@ -1,11 +1,7 @@
 class ProductsController < ApplicationController
   
   before_filter :get_product_by_id, only: [:show,:edit,:destroy,:update]
-
-  def get_product_by_id
-    @product = Product.find(params[:id])
-  end
-
+  before_filter :ensure_logged_in, only: [:show]
   def index
     @products = Product.all
     respond_to do |format|
@@ -15,6 +11,10 @@ class ProductsController < ApplicationController
   end
 
   def show
+    if current_user
+      @review = @product.reviews.build
+    end
+    
     respond_to do |format|
       format.html #show.html.erb
       format.json { render json: @product }
@@ -74,4 +74,11 @@ class ProductsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def get_product_by_id
+    @product = Product.find(params[:id])
+  end
+
 end
