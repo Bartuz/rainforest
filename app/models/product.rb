@@ -1,5 +1,15 @@
 class Product < ActiveRecord::Base
   attr_accessible :description, :name, :picture, :price
+  
+  validates_presence_of :description, :name, :picture, :price
 
-  validates :name, presence: true
+  validates :picture, format: {with: %r{\.(png|jpg|gif)$}i, messsage: "Pic format must be png/jpg/gif!"}
+
+
+  private
+
+  def picture_format_is_correct
+
+  end
+
 end
